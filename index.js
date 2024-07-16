@@ -179,4 +179,10 @@ app.delete("/plant/:id", (req,res)=>{
     })
 })
 
+app.use("*", (req,res)=>{
+    res.send(`<div>
+        <h1 style="text-align: center;">404 Not Found</h1>
+        </div>`)
+})
+
 app.listen(PORT , ()=> console.log(`Server is running on port :${PORT}`));
