@@ -32,6 +32,14 @@ const plants = [
         "description": "MangoTree"
     }
 ]
+
+//Health_end_point
+app.get("/health", (req,res)=>{
+    res.json({
+        success: true,
+        message : "Server is running"
+    })
+})
 //Create_plant
 app.post("/plant", (req,res)=>{
     const {name, category, image, price, description} = req.body
