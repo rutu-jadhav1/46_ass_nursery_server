@@ -2,12 +2,26 @@ import express from "express";
 import dotenv from "dotenv"
 dotenv.config()
 const app = express()
+import mongoose, { Mongoose } from "mongoose";
 
 import { getHealth } from "./controllers/health.js";
 import { postPlant,getPlants, getPlantid, putPlantid, deletePlant } from "./controllers/plant.js";
 import { handlePageNotFound } from "./controllers/errors.js";
 const PORT = process.env.PORT
 app.use(express.json())
+
+//Mongo_DB_connection
+const dbConnection = async ()=>{
+    const conn = await mongoose.connect(process.env.MONGO_URL)
+
+    if(conn){
+        console.log(`MongoDB Connected 📦`)
+    }
+    else{
+        console.log(`MongoDB Not Connected ❌`)
+    }
+}
+dbConnection();
 
 //Health_end_point
 app.get("/health", getHealth)
