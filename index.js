@@ -1,13 +1,17 @@
 import express from "express";
 import dotenv from "dotenv"
 dotenv.config()
-const app = express()
-import mongoose, { Mongoose } from "mongoose";
+
+import mongoose from "mongoose";
+import cors from "cors"
 
 import { getHealth } from "./controllers/health.js";
 import { postPlant,getPlants, getPlantid, putPlantid, deletePlant } from "./controllers/plant.js";
 import { handlePageNotFound } from "./controllers/errors.js";
+
 const PORT = process.env.PORT
+const app = express()
+app.use(cors())
 app.use(express.json())
 
 //Mongo_DB_connection
@@ -37,5 +41,6 @@ app.put("/plant/:id", putPlantid)
 app.delete("/plant/:id", deletePlant)
 
 app.use("*", handlePageNotFound)
+
 
 app.listen(PORT , ()=> console.log(`Server is running on port :${PORT}`));
